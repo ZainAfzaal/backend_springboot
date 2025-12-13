@@ -53,8 +53,26 @@ public class UserController {
         user.setUsername(request.username());
         user.setPassword(passwordEncoder.encode(request.password()));
         user.setEmail(request.email());
+        user.setRole("USER");
         userRepository.save(user);
         return ResponseEntity.ok("Registered successfully! ");
+
+
+    }
+
+     @PostMapping("/register")
+    public ResponseEntity<String> registerAdmin(@RequestBody RegisterRequest request) {
+        if (userRepository.existsByUsername(request.username())) {
+            return ResponseEntity.badRequest().body("UserName already exists!");
+        }
+
+        App_User user = new App_User();
+        user.setUsername(request.username());
+        user.setPassword(passwordEncoder.encode(request.password()));
+        user.setEmail(request.email());
+        user.setRole("ADMIN");
+        userRepository.save(user);
+        return ResponseEntity.ok("ADMIN created  successfully! ");
 
 
     }
