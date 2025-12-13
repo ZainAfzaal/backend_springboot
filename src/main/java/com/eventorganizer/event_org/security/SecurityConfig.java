@@ -37,6 +37,7 @@ public class SecurityConfig {
                 // This code says that everyone can (without authentication) GET/access all events by this path - /events/all.
                .requestMatchers(HttpMethod.GET, "/events/all").permitAll()
                .requestMatchers("/users/register").permitAll()
+                .requestMatchers("/users/register/admin").permitAll()
 
                 // This code says USER & ADMIN role can GET/access any event by id using this path - /events/{id}. -- ** -> same like {id} or any path
                 .requestMatchers(HttpMethod.GET, "/events/{id}").hasAnyRole("USER", "ADMIN")
