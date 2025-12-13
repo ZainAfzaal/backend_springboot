@@ -15,7 +15,7 @@ public class App_User {
     private String username;
     private String password;
     private String email;
-    private String role = "USER";
+    private String role;
 
 
 
