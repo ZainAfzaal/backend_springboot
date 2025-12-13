@@ -60,7 +60,7 @@ public class UserController {
 
     }
 
-     @PostMapping("/register")
+     @PostMapping("/register/admin")
     public ResponseEntity<String> registerAdmin(@RequestBody RegisterRequest request) {
         if (userRepository.existsByUsername(request.username())) {
             return ResponseEntity.badRequest().body("UserName already exists!");
