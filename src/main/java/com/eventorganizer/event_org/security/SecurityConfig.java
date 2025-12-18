@@ -68,6 +68,8 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
         );
 
+         http.cors(Customizer.withDefaults());
+
         //Stateful = the server remembers you after you log in.
         //Stateless = the server forgets you, so you must send your login info every time.
         //We use stateless for APIs because it’s simple, fast, and works better with tokens like JWT.
