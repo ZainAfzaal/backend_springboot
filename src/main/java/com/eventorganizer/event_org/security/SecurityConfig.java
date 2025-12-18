@@ -34,7 +34,7 @@ public class SecurityConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 
         http
-               .cors(Customizer.withDefaults());
+               
                .authorizeHttpRequests(requests -> requests
                 // This code says that everyone can (without authentication) GET/access all events by this path - /events/all.
                .requestMatchers(HttpMethod.GET, "/events/all").permitAll()
@@ -72,6 +72,7 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
         );
 
+        http..cors(Customizer.withDefaults());
         
 
         //Stateful = the server remembers you after you log in.
