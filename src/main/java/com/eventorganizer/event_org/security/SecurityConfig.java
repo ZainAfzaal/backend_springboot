@@ -72,7 +72,7 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
         );
 
-        http..cors(Customizer.withDefaults());
+        http.cors(Customizer.withDefaults());
         
 
        
