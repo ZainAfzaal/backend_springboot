@@ -33,7 +33,9 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 
-        http.authorizeHttpRequests(requests -> requests
+        http
+               .cors(Customizer.withDefaults());
+               .authorizeHttpRequests(requests -> requests
                 // This code says that everyone can (without authentication) GET/access all events by this path - /events/all.
                .requestMatchers(HttpMethod.GET, "/events/all").permitAll()
                .requestMatchers("/users/register").permitAll()
@@ -70,7 +72,7 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
         );
 
-         http.cors(Customizer.withDefaults());
+        
 
         //Stateful = the server remembers you after you log in.
         //Stateless = the server forgets you, so you must send your login info every time.
