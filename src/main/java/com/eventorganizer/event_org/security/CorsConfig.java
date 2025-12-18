@@ -16,7 +16,7 @@ public class CorsConfig {
 
         config.setAllowCredentials(false); // Keep false since you're using JWT in Authorization header (not cookies)
         config.addAllowedOrigin("*");      // Change to your frontend URL in production, e.g. "https://your-frontend.com"
-        config.addAllowedOriginPattern("*");
+        //config.addAllowedOriginPattern("*");
         config.addAllowedHeader("*");      // Allows Content-Type, Authorization, etc.
         config.addAllowedMethod("*");      // Allows GET, POST, PUT, DELETE, OPTIONS, etc.
 
