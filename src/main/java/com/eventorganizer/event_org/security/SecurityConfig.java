@@ -38,6 +38,8 @@ public class SecurityConfig {
                .requestMatchers(HttpMethod.GET, "/events/all").permitAll()
                .requestMatchers("/users/register").permitAll()
                 .requestMatchers("/users/register/admin").permitAll()
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                  
 
                 // This code says USER & ADMIN role can GET/access any event by id using this path - /events/{id}. -- ** -> same like {id} or any path
                 .requestMatchers(HttpMethod.GET, "/events/{id}").hasAnyRole("USER", "ADMIN")
