@@ -36,29 +36,29 @@ public class SecurityConfig {
         http
                
                .authorizeHttpRequests(requests -> requests
-                // This code says that everyone can (without authentication) GET/access all events by this path - /events/all.
+                
                .requestMatchers(HttpMethod.GET, "/events/all").permitAll()
                .requestMatchers("/users/register").permitAll()
                 .requestMatchers("/users/register/admin").permitAll()
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                   
 
-                // This code says USER & ADMIN role can GET/access any event by id using this path - /events/{id}. -- ** -> same like {id} or any path
+               
                 .requestMatchers(HttpMethod.GET, "/events/{id}").hasAnyRole("USER", "ADMIN")
 
-                // This code says USER & ADMIN role can  POST new events by this path - /events/add
+                
                 .requestMatchers(HttpMethod.POST, "/events/add").hasAnyRole("USER", "ADMIN")
 
-                // Only ADMIN role can PUT/update events using this path - /events/update/{id} -- ** -> same like id or any path
+               
                 .requestMatchers(HttpMethod.PUT, "/events/update/**").hasRole("ADMIN")
 
-                // Only ADMIN role can Patch/update partial events using this path - /events/update-partial/{id} -- ** -> same like {id} or any path
+               
                 .requestMatchers(HttpMethod.PATCH, "/events/update-partial/**").hasRole("ADMIN")
 
-                // Only ADMIN role can DELETE any events using this path - /events/delete/{id} -- ** -> same like {id} or any path
+                
                 .requestMatchers(HttpMethod.DELETE, "/events/delete/**").hasRole("ADMIN")
 
-                // Only Admin will handle user CRUD Operation...
+                
 
 
                 .requestMatchers("/users/login").permitAll()
@@ -68,16 +68,14 @@ public class SecurityConfig {
 
 
 
-                // All other requests must have to give authentication to log in.
+                
                 .anyRequest().authenticated()
         );
 
         http..cors(Customizer.withDefaults());
         
 
-        //Stateful = the server remembers you after you log in.
-        //Stateless = the server forgets you, so you must send your login info every time.
-        //We use stateless for APIs because it’s simple, fast, and works better with tokens like JWT.
+       
         http.sessionManagement(session
                 -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
@@ -88,7 +86,7 @@ public class SecurityConfig {
 
 
         //http.formLogin(Customizer.withDefaults());
-        http.httpBasic(Customizer.withDefaults());
+        //http.httpBasic(Customizer.withDefaults());
 
         http.csrf(csrf -> csrf.disable());
         return http.build();
