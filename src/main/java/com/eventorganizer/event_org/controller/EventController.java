@@ -16,9 +16,22 @@ public class EventController {
     @Autowired
     private EventService service;
 
-    @PostMapping("/add")
+    // @PostMapping("/add")
+    // public Event addEvent(@RequestBody Event event) {
+    //     return service.addevent(event);
+    // }
+
+     @PostMapping("/add")
     public Event addEvent(@RequestBody Event event) {
-        return service.addevent(event);
+
+        String username  = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        App_User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        event.setCreatedBy(user.getUsername());
+
+        return eventRepository.save(event);
     }
 
     @GetMapping("/all")
