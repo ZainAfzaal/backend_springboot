@@ -18,6 +18,7 @@ public class Event {
     private String date;
     private String location;
     private  String description;
+    
 
     @Column(name = "created_by")
     private String createdBy;
