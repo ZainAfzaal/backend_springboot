@@ -1,9 +1,13 @@
 package com.eventorganizer.event_org.controller;
 
 import com.eventorganizer.event_org.model.Event;
+import com.eventorganizer.event_org.model.App_User;
+import com.eventorganizer.event_org.repository.EventRepository;
+import com.eventorganizer.event_org.repository.UserRepository;
 import com.eventorganizer.event_org.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
 
@@ -15,6 +19,12 @@ public class EventController {
 
     @Autowired
     private EventService service;
+
+    @Autowired
+    private EventRepository eventRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     // @PostMapping("/add")
     // public Event addEvent(@RequestBody Event event) {
