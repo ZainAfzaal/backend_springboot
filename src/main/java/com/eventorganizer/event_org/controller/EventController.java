@@ -59,8 +59,31 @@ public class EventController {
         return service.updateEvent(id, event);
     }
 
+    // @DeleteMapping("/delete/{id}")
+    // public String deleteEvent(@PathVariable Long id) {
+    //     return service.deleteEvent(id);
+    // }
+
     @DeleteMapping("/delete/{id}")
     public String deleteEvent(@PathVariable Long id) {
-        return service.deleteEvent(id);
+
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        String role = SecurityContextHolder.getContext().getAuthentication().getAuthorities().iterator().next().getAuthority();
+
+        Event event = eventRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("event not found"));
+
+        if(role.equals("ROLE_ADMIN")){
+            eventRepository.delete(event);
+            return "Event deleted Successfully by Admin";
+        }
+
+        if(!event.getCreatedBy().equals(username)){
+            throw new IllegalArgumentException("You are not allowed to delete this event");
+        }
+
+
+        eventRepository.delete(event);
+        return "Event deleted.";
     }
 }
