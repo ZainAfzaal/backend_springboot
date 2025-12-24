@@ -56,7 +56,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.PATCH, "/events/update-partial/**").hasRole("ADMIN")
 
                 
-                .requestMatchers(HttpMethod.DELETE, "/events/delete/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/events/delete/**").hasAnyRole("USER", "ADMIN")
 
                 
 
