@@ -19,6 +19,9 @@ public class Event {
     private String location;
     private  String description;
 
+    @Column(name = "created_by")
+    private String createdBy;
+
     public String getTitle() {
         return title;
     }
@@ -50,4 +53,14 @@ public class Event {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    
 }
