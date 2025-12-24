@@ -21,7 +21,7 @@ public class EventController {
     //     return service.addevent(event);
     // }
 
-     @PostMapping("/add")
+    @PostMapping("/add")
     public Event addEvent(@RequestBody Event event) {
 
         String username  = SecurityContextHolder.getContext().getAuthentication().getName();
