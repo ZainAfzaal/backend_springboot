@@ -37,7 +37,8 @@ public class SecurityConfig {
                
                .authorizeHttpRequests(requests -> requests
                 
-               .requestMatchers(HttpMethod.GET, "/events/all").permitAll()
+              // .requestMatchers(HttpMethod.GET, "/events/all").permitAll()
+                .requestMatchers("/events/**").permitAll()                      
                .requestMatchers("/users/register").permitAll()
                 .requestMatchers("/users/register/admin").permitAll()
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
