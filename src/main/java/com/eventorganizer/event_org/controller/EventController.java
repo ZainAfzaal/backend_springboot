@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
+import java.util.ArrayList;
 
 
 @RestController
@@ -40,6 +41,29 @@ public class EventController {
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
         event.setCreatedBy(user.getUsername());
+
+        return eventRepository.save(event);
+    }
+
+    @PostMapping("/join/{id}")
+    public Event joinEvent(@PathVariable Long id) {
+
+        String username  = SecurityContextHolder.getContext().getAuthentication().getName();
+        App_User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        Event event = eventRepository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("Event not found"));
+
+        if(event.getJoinedBy()== null){
+            event.setJoinedBy(new ArrayList<>());
+        }
+
+        if (!event.getJoinedBy().contains(user.getUsername())){
+            event.getJoinedBy().add(user.getUsername());
+            eventRepository.save(event);
+
+        }
 
         return eventRepository.save(event);
     }
