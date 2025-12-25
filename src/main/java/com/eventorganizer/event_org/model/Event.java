@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Event {
@@ -23,6 +25,10 @@ public class Event {
 
     @Column(name = "created_by")
     private String createdBy;
+
+    @ElementCollection
+    @Column (name = "Participants")
+    private List<String> joinedBy = new ArrayList<>();
 
     public String getTitle() {
         return title;
@@ -62,6 +68,14 @@ public class Event {
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
+    }
+
+     public List<String> getJoinedBy() {
+        return joinedBy;
+    }
+
+    public void setJoinedBy(List<String> joinedBy) {
+        this.joinedBy = joinedBy;
     }
 
     
