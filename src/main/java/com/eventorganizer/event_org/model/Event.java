@@ -26,7 +26,7 @@ public class Event {
     @Column(name = "created_by")
     private String createdBy;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @Column (name = "Participants")
     private List<String> joinedBy = new ArrayList<>();
 
