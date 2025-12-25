@@ -58,6 +58,8 @@ public class SecurityConfig {
                 
                 .requestMatchers(HttpMethod.DELETE, "/events/delete/**").hasAnyRole("USER", "ADMIN")
 
+                .requestMatchers(HttpMethod.POST, "/events/join/**").hasAnyRole("USER", "ADMIN")
+
                 
 
 
