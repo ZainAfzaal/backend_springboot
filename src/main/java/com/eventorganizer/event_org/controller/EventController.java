@@ -66,7 +66,7 @@ public class EventController {
 
         }
 
-        return eventRepository.save(event);
+        return event;
     }
 
     @GetMapping("/all")
