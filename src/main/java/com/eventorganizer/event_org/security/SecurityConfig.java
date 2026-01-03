@@ -44,6 +44,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                   
 
+                .requestMatchers(HttpMethod.POST, "/events/join/**").hasAnyRole("USER", "ADMIN")
                
                 .requestMatchers(HttpMethod.GET, "/events/{id}").hasAnyRole("USER", "ADMIN")
 
