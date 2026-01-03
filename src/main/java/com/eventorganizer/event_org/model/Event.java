@@ -30,6 +30,15 @@ public class Event {
     @Column (name = "Participants")
     private List<String> joinedBy = new ArrayList<>();
 
+     public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+
     public String getTitle() {
         return title;
     }
