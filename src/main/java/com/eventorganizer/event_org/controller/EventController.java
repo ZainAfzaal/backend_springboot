@@ -42,6 +42,7 @@ public class EventController {
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
         event.setCreatedBy(user.getUsername());
+        event.setJoinedBy(new ArrayList<>());
 
         return eventRepository.save(event);
     }
