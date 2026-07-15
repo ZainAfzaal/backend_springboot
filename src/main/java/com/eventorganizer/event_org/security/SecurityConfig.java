@@ -151,7 +151,7 @@ public class SecurityConfig {
                             });
 
                     String token = jwtService.generateToken(user.getUsername());
-                    response.sendRedirect("http://localhost:5500/home.html"
+                    response.sendRedirect("https://eventorganizerapp.up.railway.app/ "
                             + "?token=" + token
                             + "&role=" + user.getRole());
                 })
