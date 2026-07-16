@@ -151,9 +151,10 @@ public class SecurityConfig {
                             });
 
                     String token = jwtService.generateToken(user.getUsername());
-                    response.sendRedirect("https://eventorganizerapp.up.railway.app/ "
-                            + "?token=" + token
-                            + "&role=" + user.getRole());
+                    
+                    response.sendRedirect("https://event-app-frontend-one.vercel.app/home.html"
+        + "?token=" + token
+        + "&role=" + user.getRole());
                 })
         );
         return http.build();
