@@ -122,41 +122,22 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable());
 
         http.oauth2Login(oauth2 -> oauth2
-                .successHandler((request, response, authentication) -> {
-                    OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
-                    String email = oAuth2User.getAttribute("email");
-                    String name  = oAuth2User.getAttribute("name");
+    .successHandler((request, response, authentication) -> {
+        OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
+        String email = oAuth2User.getAttribute("email");
+        String name = oAuth2User.getAttribute("name");
 
-                    App_User user = userRepository.findByEmail(email)
-                            .orElseGet(() -> {
-                                String baseUsername = name.replaceAll("\\s+", "").toLowerCase();
-                                String finalUsername = baseUsername;
-                                int counter = 1;
+        // your existing user creation code...
 
-                                while (userRepository.existsByUsername(finalUsername)) {
-                                    finalUsername = baseUsername + counter;
-                                    counter++;
-                                }
+        String token = jwtService.generateToken(user.getUsername());
 
-                                App_User newUser = new App_User();
-                                newUser.setUsername(finalUsername);
-                                newUser.setEmail(email);
-                                newUser.setPassword("");
-                                newUser.setRole("USER");
-                                userRepository.save(newUser);
-
-                                emailService.sednregistrationemail(newUser.getEmail(), newUser.getUsername());
-
-                                return newUser;
-                            });
-
-                    String token = jwtService.generateToken(user.getUsername());
-                    
-                    response.sendRedirect("https://event-app-frontend-one.vercel.app/home.html"
-                        + "?token=" + token
-                        + "&role=" + user.getRole());
-                    });
+        response.sendRedirect(
+            "https://event-app-frontend-one.vercel.app/home.html"
+                + "?token=" + token
+                + "&role=" + user.getRole()
         );
+    })
+);
         return http.build();
     }
 
