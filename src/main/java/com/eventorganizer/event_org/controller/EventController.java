@@ -230,7 +230,7 @@ public class EventController {
             eventRepository.delete(event);
             for (String participant : event.getJoinedBy()) {
                 userRepository.findByUsername(participant).ifPresent(user ->
-                        emailService.adminCancellationEvent(user.getEmail(), event.getTitle())
+                       // emailService.adminCancellationEvent(user.getEmail(), event.getTitle())
                 );
             }
             return "Event deleted by Admin.";
@@ -243,7 +243,7 @@ public class EventController {
             eventRepository.delete(event);
             for (String participant : event.getJoinedBy()) {
                 userRepository.findByUsername(participant).ifPresent(user ->
-                        emailService.sendCancellationEmail(user.getEmail(), event.getTitle())
+                      //  emailService.sendCancellationEmail(user.getEmail(), event.getTitle())
                 );
             }
             return "Event deleted.";
