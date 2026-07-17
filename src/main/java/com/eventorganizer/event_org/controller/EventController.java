@@ -45,7 +45,12 @@ public class EventController {
 
 
             Event savesdEvent = eventRepository.save(event);
+            try{
             emailService.sendNewEventMail(user.getEmail(), user.getUsername());
+            } catch (Exception e) {
+              log.error("Failed to send email notification", e);
+                // Do NOT rethrow - let event creation succeed
+            }
             return savesdEvent;
 
     }
