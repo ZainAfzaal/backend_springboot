@@ -45,7 +45,7 @@ public class EventController {
 
 
             Event savesdEvent = eventRepository.save(event);
-            emailService.sendNewEventMail(user.getEmail(), user.getUsername());
+           // emailService.sendNewEventMail(user.getEmail(), user.getUsername());
             return savesdEvent;
 
     }
