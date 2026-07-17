@@ -176,20 +176,20 @@ public class EventController {
 
         eventRepository.save(existing);
 
-        if (role.equals("ROLE_ADMIN")) {
+        // if (role.equals("ROLE_ADMIN")) {
 
-            for (String participants : existing.getJoinedBy()) {
-                userRepository.findByUsername(participants).ifPresent(user -> {
-                    emailService.adminUpdateEvent(user.getEmail(), existing.getTitle());
-                });
-            }
-        } else {
-            for (String participants : existing.getJoinedBy()) {
-                userRepository.findByUsername(participants).ifPresent(user -> {
-                    emailService.sendUpdateEmail(user.getEmail(), existing.getTitle());
-                });
-            }
-        }
+        //     for (String participants : existing.getJoinedBy()) {
+        //         userRepository.findByUsername(participants).ifPresent(user -> {
+        //             emailService.adminUpdateEvent(user.getEmail(), existing.getTitle());
+        //         });
+        //     }
+        // } else {
+        //     for (String participants : existing.getJoinedBy()) {
+        //         userRepository.findByUsername(participants).ifPresent(user -> {
+        //             emailService.sendUpdateEmail(user.getEmail(), existing.getTitle());
+        //         });
+        //     }
+        // }
 
         return existing;
     }
@@ -228,11 +228,11 @@ public class EventController {
         if (role.equals("ROLE_ADMIN")) {
             // Admin can delete ANY event, no ownership check
             eventRepository.delete(event);
-            for (String participant : event.getJoinedBy()) {
-                userRepository.findByUsername(participant).ifPresent(user ->
-                       // emailService.adminCancellationEvent(user.getEmail(), event.getTitle())
-                );
-            }
+            // for (String participant : event.getJoinedBy()) {
+            //     userRepository.findByUsername(participant).ifPresent(user ->
+            //             emailService.adminCancellationEvent(user.getEmail(), event.getTitle())
+            //     );
+            // }
             return "Event deleted by Admin.";
 
         } else {
@@ -241,11 +241,11 @@ public class EventController {
                 throw new IllegalArgumentException("You are not allowed to delete this event");
             }
             eventRepository.delete(event);
-            for (String participant : event.getJoinedBy()) {
-                userRepository.findByUsername(participant).ifPresent(user ->
-                      //  emailService.sendCancellationEmail(user.getEmail(), event.getTitle())
-                );
-            }
+            // for (String participant : event.getJoinedBy()) {
+            //     userRepository.findByUsername(participant).ifPresent(user ->
+            //            emailService.sendCancellationEmail(user.getEmail(), event.getTitle())
+            //     );
+            // }
             return "Event deleted.";
         }
     }
