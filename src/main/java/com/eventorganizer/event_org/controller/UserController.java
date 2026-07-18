@@ -69,7 +69,7 @@ public class UserController {
 
         try {
             userRepository.save(user);
-            emailService.sednregistrationemail(user.getEmail(), user.getUsername());
+            //emailService.sednregistrationemail(user.getEmail(), user.getUsername());
             return ResponseEntity.ok("Registered successfully!");
         } catch (Exception e) {
             // If anything fails, delete the saved user so they can try again
